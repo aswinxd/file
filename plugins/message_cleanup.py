@@ -1,5 +1,6 @@
 import asyncio
 from pyrogram import filters
+from bot import Bot  # Import the Bot class from the correct module
 
 async def delete_bot_messages(client, chat_id, message_ids, delay):
     await asyncio.sleep(delay)
