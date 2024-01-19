@@ -1,17 +1,17 @@
-#(©)Codexbotz
-
 from aiohttp import web
 from plugins import web_server
 
-import pyromod.listen
 from pyrogram import Client
 from pyrogram.enums import ParseMode
-import sys
 from datetime import datetime
+import sys
 
 from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL, CHANNEL_ID, PORT
 
 class Bot(Client):
+    async def get_me(self):
+        return await super().get_me()
+
     def __init__(self):
         super().__init__(
             name="Bot",
@@ -46,7 +46,7 @@ class Bot(Client):
         try:
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
-            test = await self.send_message(chat_id = db_channel.id, text = "Test Message")
+            test = await self.send_message(chat_id=db_channel.id, text="Test Message")
             await test.delete()
         except Exception as e:
             self.LOGGER(__name__).warning(e)
@@ -57,15 +57,15 @@ class Bot(Client):
         self.set_parse_mode(ParseMode.HTML)
         self.LOGGER(__name__).info(f"Bot Running..!\n\nCreated by \nhttps://t.me/CodeXBotz")
         self.LOGGER(__name__).info(f""" \n\n       
-░█████╗░░█████╗░██████╗░███████╗██╗░░██╗██████╗░░█████╗░████████╗███████╗
-██╔══██╗██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗╚══██╔══╝╚════██║
-██║░░╚═╝██║░░██║██║░░██║█████╗░░░╚███╔╝░██████╦╝██║░░██║░░░██║░░░░░███╔═╝
-██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░██╔══██╗██║░░██║░░░██║░░░██╔══╝░░
-╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗██████╦╝╚█████╔╝░░░██║░░░███████╗
-░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░░░░╚═╝░░░╚══════╝
-                                          """)
+    ░█████╗░░█████╗░██████╗░███████╗██╗░░██╗██████╗░░█████╗░████████╗███████╗
+    ██╔══██╗██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗╚══██╔══╝╚════██║
+    ██║░░╚═╝██║░░██║██║░░██║█████╗░░░╚███╔╝░██████╦╝██║░░██║░░░██║░░░░░███╔═╝
+    ██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░██╔══██╗██║░░██║░░░██║░░░██╔══╝░░
+    ╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗██████╦╝╚█████╔╝░░░██║░░░███████╗
+    ░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░░░░╚═╝░░░╚══════╝
+                                              """)
         self.username = usr_bot_me.username
-        #web-response
+        # web-response
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
