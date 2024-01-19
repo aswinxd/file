@@ -60,5 +60,3 @@ async def new_post(client: Client, message: Message):
     # Schedule a task to delete the bot's messages every 10 minutes
     asyncio.create_task(delete_bot_messages(client, message.chat.id, [message.message_id]))
 
-# Run the bot
-Bot.run()
