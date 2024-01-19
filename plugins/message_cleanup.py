@@ -1,6 +1,6 @@
 import asyncio
 from pyrogram import filters
-from bot import Bot  # Import the Bot class from the correct module
+from bot import Bot
 
 async def delete_bot_messages(client, chat_id, message_ids, delay):
     await asyncio.sleep(delay)
@@ -9,7 +9,7 @@ async def delete_bot_messages(client, chat_id, message_ids, delay):
     except Exception as e:
         print(f"Error deleting messages: {e}")
 
-@Bot.on_message(filters.user(Bot.get_me().id) & ~filters.command("start"))
+@Bot.on_message(filters.user(await Bot.get_me().id) & ~filters.command("start"))
 async def outgoing_message_handler(client, message):
     # Set the delay for message deletion (e.g., 10 seconds for testing)
     delay = 10  # seconds
