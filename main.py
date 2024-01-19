@@ -1,5 +1,7 @@
 from pyrogram import Client
 from bot import Bot
+from plugins.message_cleanup import *
+
 
 def main():
     # Your existing code...
