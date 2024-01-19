@@ -2,7 +2,6 @@ from pyrogram import Client
 from bot import Bot
 from plugins.message_cleanup import *
 
-
 def main():
     # Your existing code...
 
@@ -12,5 +11,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-  
-Bot().run()
